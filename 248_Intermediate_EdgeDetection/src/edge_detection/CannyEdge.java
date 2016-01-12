@@ -6,7 +6,7 @@ public class CannyEdge {
         int width = img.getWidth();
         int height = img.getHeight();
         
-        Pixel[][] values = img.getValues();
+        Pixel[][] values = img.getPixels();
         double[][] edgeDirection = img.getEdgeDirection();
         
         PPMImage edged = new PPMImage(width, height);
@@ -201,7 +201,7 @@ public class CannyEdge {
         int width = img.getWidth();
         int height = img.getHeight();
         
-        Pixel[][] values = img.getValues();
+        Pixel[][] values = img.getPixels();
         
         PPMImage edged = new PPMImage(width, height);
         

@@ -5,25 +5,24 @@ public class PPMImage {
     private final int width;
     private final int height;
 
-    private Pixel[][] values;
+    private Pixel[][] pixels;
 
     private String header;
-
-    private double[][] edgeDirection; //TO BE MOVED TO ITS OWN CLASS
+    private double[][] edgeDirections;
 
     public PPMImage(int width, int height) {
         this.width = width;
         this.height = height;
 
-        values = new Pixel[height][width];
+        pixels = new Pixel[height][width];
 
         header = "P3\n" + width + " " + height + "\n255\n";
 
-        edgeDirection = new double[height][width]; //SUPER MESSY
+        edgeDirections = new double[height][width]; //SUPER MESSY
     }
 
     public void drawPixel(int red, int green, int blue, int x, int y) {
-        values[y][x] = new Pixel(red, green, blue);
+        pixels[y][x] = new Pixel(red, green, blue);
     }
     
     public PPMImage toGreyScale() {
@@ -31,7 +30,7 @@ public class PPMImage {
         
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                greyScale.values[y][x] = values[y][x].toGreyScale();
+                greyScale.pixels[y][x] = pixels[y][x].toGreyScale();
             }
         }
         
@@ -53,7 +52,7 @@ public class PPMImage {
                         for (int i = -radius; i <= radius; i++) {
                             if (((x + i) >= 0 && (y + j) >= 0)
                                     && ((x + i) < width && (y + j) < height)) {
-                                sum += values[y + j][x + i].getRed();
+                                sum += pixels[y + j][x + i].getRed();
                                 count++;
                             }
                         }
@@ -76,41 +75,41 @@ public class PPMImage {
                 int gY = 0;
                 if ((y - 1) >= 0) {
                     if ((x - 1) >= 0) {
-                        gY += values[y - 1][x - 1].getRed();
+                        gY += pixels[y - 1][x - 1].getRed();
                     }
                     if ((x + 1) < width) {
-                        gY += values[y - 1][x + 1].getRed();
+                        gY += pixels[y - 1][x + 1].getRed();
                     }
-                    gY += (2 * values[y - 1][x].getRed());
+                    gY += (2 * pixels[y - 1][x].getRed());
                 }
                 if ((y + 1) < height) {
                     if ((x - 1) >= 0) {
-                        gY -= values[y + 1][x - 1].getRed();
+                        gY -= pixels[y + 1][x - 1].getRed();
                     }
                     if ((x + 1) < width) {
-                        gY -= values[y + 1][x + 1].getRed();
+                        gY -= pixels[y + 1][x + 1].getRed();
                     }
-                    gY -= (2 * values[y + 1][x].getRed());
+                    gY -= (2 * pixels[y + 1][x].getRed());
                 }
 
                 int gX = 0;
                 if ((x - 1) >= 0) {
                     if ((y - 1) >= 0) {
-                        gX += values[y - 1][x - 1].getRed();
+                        gX += pixels[y - 1][x - 1].getRed();
                     }
                     if ((y + 1) < height) {
-                        gX += values[y + 1][x - 1].getRed();
+                        gX += pixels[y + 1][x - 1].getRed();
                     }
-                    gX += (2 * values[y][x - 1].getRed());
+                    gX += (2 * pixels[y][x - 1].getRed());
                 }
                 if ((x + 1) < width) {
                     if ((y - 1) >= 0) {
-                        gX -= values[y - 1][x + 1].getRed();
+                        gX -= pixels[y - 1][x + 1].getRed();
                     }
                     if ((y + 1) < height) {
-                        gX -= values[y + 1][x + 1].getRed();
+                        gX -= pixels[y + 1][x + 1].getRed();
                     }
-                    gX -= (2 * values[y][x + 1].getRed());
+                    gX -= (2 * pixels[y][x + 1].getRed());
                 }
 
                 int grad = (int) Math.sqrt((gY * gY) + (gX * gX));
@@ -134,16 +133,16 @@ public class PPMImage {
         return height;
     }
 
-    public Pixel[][] getValues() {
-        return values;
+    public Pixel[][] getPixels() {
+        return pixels;
     }
 
     public double[][] getEdgeDirection() {
-        return edgeDirection;
+        return edgeDirections;
     }
 
     public void setEdgeDirectionVal(int x, int y, double value) { //SUPER MESSY
-        edgeDirection[y][x] = value;
+        edgeDirections[y][x] = value;
     }
 
     @Override
@@ -153,10 +152,10 @@ public class PPMImage {
 
         for (int j = 0; j < height; j++) {
             for (int i = 0; i < width; i++) {
-                if (values[j][i] == null) {
-                    values[j][i] = new Pixel();
+                if (pixels[j][i] == null) {
+                    pixels[j][i] = new Pixel();
                 }
-                sb.append(values[j][i]).append("  ");
+                sb.append(pixels[j][i]).append("  ");
             }
             sb.append("\n");
         }
