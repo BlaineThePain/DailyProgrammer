@@ -7,7 +7,7 @@ public class PPMImage {
     private final int width;
     private final int height;
 
-    private Pixel[][] values;
+    private Pixel[][] pixels;
 
     private String header;
 
@@ -15,13 +15,13 @@ public class PPMImage {
         this.width = width;
         this.height = height;
 
-        values = new Pixel[height][width];
+        pixels = new Pixel[height][width];
 
         header = "P3\n" + width + " " + height + "\n255\n";
     }
 
     public void drawPixel(int red, int green, int blue, int x, int y) {
-        values[y][x] = new Pixel(red, green, blue);
+        pixels[y][x] = new Pixel(red, green, blue);
     }
 
     public void drawRectangle(int red, int green, int blue, int startX, int startY,
@@ -100,10 +100,10 @@ public class PPMImage {
 
         for (int j = 0; j < height; j++) {
             for (int i = 0; i < width; i++) {
-                if (values[j][i] == null) {
-                    values[j][i] = new Pixel();
+                if (pixels[j][i] == null) {
+                    pixels[j][i] = new Pixel();
                 }
-                sb.append(values[j][i]).append("  ");
+                sb.append(pixels[j][i]).append("  ");
             }
             sb.append("\n");
         }
