@@ -11,7 +11,7 @@ public class Genetic {
 
     private static List<Individual> population;
     private static int popSize = 100;
-    private static double mutationRate = 0.1;
+    private static double mutationRate = 0.05;
     private static boolean sexually = true;
 
     private static int generationCount;
@@ -30,6 +30,8 @@ public class Genetic {
         System.out.println("Mutation rate: " + mutationRate);
         System.out.println("Sexual reproduction: " + sexually);
         System.out.println("*****************");
+        
+        long startTime = System.currentTimeMillis();
 
         initialize(popSize);
         killUnfitNoRandom();
@@ -40,8 +42,14 @@ public class Genetic {
             System.out.println("Gen: " + generationCount + " | " + bestIndividual);
             killUnfitNoRandom();
         }
+        
+        long endTime = System.currentTimeMillis();
+        
         generationCount++;
-        System.out.println("Gen: " + generationCount + " | " + bestIndividual);
+        System.out.println("Gen: " + generationCount + " | " + bestIndividual + "\n");
+        
+        System.out.println("Elapsed time is " +
+                ((double) (endTime - startTime) / 1000) + " seconds.");
     }
 
     public static void initialize(int populationSize) {
