@@ -22,14 +22,6 @@ public class Genetic {
 
         runSimulation();
 
-        /*Individual i = new Individual("0000000000000");
-         Individual j = new Individual("1111111111111");
-        
-         Individual s = i.reproduceAsexually();
-         s.mutate(mutationRate);
-        
-         System.out.println(i);
-         System.out.println(s);*/
     }
 
     public static void runSimulation() {
