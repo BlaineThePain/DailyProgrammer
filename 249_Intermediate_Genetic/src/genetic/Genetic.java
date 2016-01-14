@@ -1,6 +1,7 @@
 package genetic;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class Genetic {
         while (bestFitness > 0 && generationCount < 1000) {
 
             reproduce();
-            System.out.println("Gen: " + generationCount + " | " + bestIndividual);
+            //System.out.println("Gen: " + generationCount + " | " + bestIndividual);
             killUnfitNoRandom();
         }
         
@@ -106,6 +107,7 @@ public class Genetic {
 
     public static void reproduceSexually() {
         ArrayList<Individual> newbornList = new ArrayList<>();
+        Collections.shuffle(population);
 
         for (int i = 0; i < population.size(); i += 2) {
             Individual firstParent = population.get(i);
